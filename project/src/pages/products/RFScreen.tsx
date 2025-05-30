@@ -1,0 +1,116 @@
+import React, { useState } from 'react';
+import { Calculator } from 'lucide-react';
+
+interface RFScreenInputs {
+  width: number;
+  length: number;
+  height: number;
+  screenType: string;
+  loadRating: number;
+}
+
+const RFScreen: React.FC = () => {
+  const [inputs, setInputs] = useState<RFScreenInputs>({
+    width: 2400,
+    length: 2400,
+    height: 1200,
+    screenType: 'Standard',
+    loadRating: 2.5
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setInputs(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  return (
+    <div className="bg-white rounded-lg shadow-sm p-6">
+      <div className="flex items-center mb-6">
+        <Calculator className="h-6 w-6 text-primary-600 mr-2" />
+        <h2 className="text-xl font-semibold text-gray-900">RF Screen Calculator</h2>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Width (mm)
+          </label>
+          <input
+            type="number"
+            name="width"
+            value={inputs.width}
+            onChange={handleInputChange}
+            className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Length (mm)
+          </label>
+          <input
+            type="number"
+            name="length"
+            value={inputs.length}
+            onChange={handleInputChange}
+            className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Height (mm)
+          </label>
+          <input
+            type="number"
+            name="height"
+            value={inputs.height}
+            onChange={handleInputChange}
+            className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Screen Type
+          </label>
+          <select
+            name="screenType"
+            value={inputs.screenType}
+            onChange={handleInputChange}
+            className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+          >
+            <option value="Standard">Standard</option>
+            <option value="Heavy Duty">Heavy Duty</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Load Rating (kPa)
+          </label>
+          <select
+            name="loadRating"
+            value={inputs.loadRating}
+            onChange={handleInputChange}
+            className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+          >
+            <option value="2.5">2.5</option>
+            <option value="5.0">5.0</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="mt-8">
+        <button className="w-full px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+          Calculate
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default RFScreen;
