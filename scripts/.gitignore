@@ -1,0 +1,8 @@
+# Ignore all files in the scripts folder
+scripts/*
+
+# But do not ignore the scripts folder itself
+!scripts/
+
+# Allow specific scripts if needed (uncomment and edit as required)
+#!scripts/keep-this-script.sh
