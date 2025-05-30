@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useDropboxAuth } from '../hooks/useDropboxAuth';
 import Header from '../components/Header';
+import NavigationTabs from '../components/NavigationTabs';
 import Breadcrumbs from '../components/Breadcrumbs';
 import FilterBar from '../components/FilterBar';
 import DataTable from '../components/DataTable';
@@ -125,23 +126,7 @@ const DashboardPage: React.FC = () => {
           />
         </div>
 
-        <div className="mb-6 flex space-x-4">
-          {['search', 'upload', 'design', 'calculator', 'odoo'].map((tab) => (
-            <button
-              key={tab}
-              className={`px-6 py-2 rounded-lg font-mono transition-colors ${
-                activeTab === tab
-                  ? tab === 'odoo'
-                    ? 'bg-[#714B67] text-white shadow-sm'
-                    : 'bg-primary-500 text-white shadow-sm'
-                  : 'bg-white text-gray-700 hover:bg-gray-50'
-              }`}
-              onClick={() => setActiveTab(tab as any)}
-            >
-              {tab.charAt(0).toUpperCase() + tab.slice(1)}
-            </button>
-          ))}
-        </div>
+        <NavigationTabs activeTab={activeTab} setActiveTab={setActiveTab} />
 
         {activeTab === 'search' && (
           <div className="space-y-6">

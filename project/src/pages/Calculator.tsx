@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { Calculator as CalculatorIcon } from 'lucide-react';
 import Breadcrumbs from '../components/Breadcrumbs';
+import NavigationTabs from '../components/NavigationTabs';
 import Standard from './products/Standard';
 import EasyMechMR from './products/EasyMechMR';
 import SpanPlus from './products/SpanPlus';
@@ -113,7 +114,7 @@ const Calculator: React.FC = () => {
       <div className="mb-6">
         <Breadcrumbs items={breadcrumbItems} />
       </div>
-
+      <NavigationTabs activeTab={"calculator"} />
       <Routes>
         <Route path="/" element={<ProductSelector />} />
         {Object.values(CATEGORIES).flat().map(product => (
