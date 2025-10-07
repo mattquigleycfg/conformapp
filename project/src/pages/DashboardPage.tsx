@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { useDropboxAuth } from '../hooks/useDropboxAuth';
+import { useAuth } from '../contexts/AuthContext';
 import Header from '../components/Header';
 import NavigationTabs from '../components/NavigationTabs';
 import Breadcrumbs from '../components/Breadcrumbs';
@@ -30,7 +30,7 @@ const DashboardPage: React.FC = () => {
   const { sortedData, sortConfig, requestSort } = useSorting(filteredData);
   const { pdfUrl, isPdfOpen, openPdf, closePdf } = usePdfPreview();
   const [activeTab, setActiveTab] = useState<'search' | 'upload' | 'design' | 'odoo' | 'calculator'>('search');
-  const { isAuthenticated } = useDropboxAuth();
+  const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {

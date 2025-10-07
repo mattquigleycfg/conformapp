@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useDropboxAuth } from '../hooks/useDropboxAuth';
+import { useAuth } from '../contexts/AuthContext';
 
 const AuthCallback: React.FC = () => {
   const location = useLocation();
-  const { handleCallback } = useDropboxAuth();
+  const { handleCallback } = useAuth();
 
   useEffect(() => {
     const processAuth = async () => {

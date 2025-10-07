@@ -1,10 +1,10 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useDropboxAuth } from '../hooks/useDropboxAuth';
+import { useAuth } from '../contexts/AuthContext';
 import LoginButton from '../components/LoginButton';
 
 const LoginPage: React.FC = () => {
-  const { isAuthenticated, login } = useDropboxAuth();
+  const { isAuthenticated, login } = useAuth();
 
   if (isAuthenticated) {
     return <Navigate to="/dashboard" replace />;

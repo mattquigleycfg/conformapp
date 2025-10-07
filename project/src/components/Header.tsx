@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { HelpCircle, User, LogOut, ChevronDown } from 'lucide-react';
-import { useDropboxAuth } from '../hooks/useDropboxAuth';
+import { useAuth } from '../contexts/AuthContext';
 
 const Header: React.FC = () => {
-  const { isAuthenticated, logout } = useDropboxAuth();
+  const { isAuthenticated, logout } = useAuth();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
