@@ -163,6 +163,7 @@ const DashboardPage: React.FC = () => {
                 sortConfig={sortConfig}
                 onSort={requestSort}
                 onViewPdf={handleViewPdf}
+                currentFolder={currentFolder}
               />
             )}
           </div>

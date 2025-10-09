@@ -8,6 +8,7 @@ interface DataTableProps {
   sortConfig: SortConfig;
   onSort: (key: keyof DrawingRecord) => void;
   onViewPdf: (drawingId: string) => void;
+  currentFolder?: string;
 }
 
 const columns: ColumnDefinition[] = [
@@ -25,7 +26,8 @@ const DataTable: React.FC<DataTableProps> = ({
   data,
   sortConfig,
   onSort,
-  onViewPdf
+  onViewPdf,
+  currentFolder
 }) => {
   const getDownloadUrl = (drawingId: string) => {
     const basePath = 'Con-form%20Shared%20Drive/Engineering/15.%20Shop%20Drawings';
@@ -33,12 +35,25 @@ const DataTable: React.FC<DataTableProps> = ({
     return `https://www.dropbox.com/home/${basePath}/${encodedDrawingId}.pdf`;
   };
 
+  // Filter columns based on current folder
+  const getVisibleColumns = () => {
+    if (currentFolder === 'CR') {
+      // For CR folder, exclude PITCH, BOX_GUTTER, and RIDGE columns
+      return columns.filter(column => 
+        !['PITCH', 'BOX_GUTTER', 'RIDGE'].includes(column.key)
+      );
+    }
+    return columns;
+  };
+
+  const visibleColumns = getVisibleColumns();
+
   return (
     <div className="overflow-x-auto rounded-lg shadow">
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-50">
           <tr>
-            {columns.map((column) => (
+            {visibleColumns.map((column) => (
               <th
                 key={column.key}
                 scope="col"
@@ -66,7 +81,7 @@ const DataTable: React.FC<DataTableProps> = ({
         <tbody className="bg-white divide-y divide-gray-200">
           {data.length === 0 ? (
             <tr>
-              <td colSpan={columns.length + 1} className="px-6 py-12 text-center text-gray-500">
+              <td colSpan={visibleColumns.length + 1} className="px-6 py-12 text-center text-gray-500">
                 <div className="flex flex-col items-center justify-center">
                   <p className="text-lg">No drawings found</p>
                   <p className="text-sm mt-2">Try adjusting your filters or upload a new drawings list</p>
@@ -82,7 +97,7 @@ const DataTable: React.FC<DataTableProps> = ({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.2, delay: index * 0.02 }}
               >
-                {columns.map((column) => (
+                {visibleColumns.map((column) => (
                   <td key={column.key} className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
                     {column.key === 'SHOP_DRAWING' ? (
                       <div className="max-w-xs truncate">{String(item[column.key])}</div>
