@@ -10,7 +10,7 @@ export const useSorting = (data: DisplayDrawingRecord[]) => {
   const sortedData = useMemo(() => {
     const dataCopy = [...data];
     
-    // Always apply default multi-column sorting (Width then Length)
+    // Always apply default multi-column sorting (Width then Length then Pitch)
     return dataCopy.sort((a, b) => {
       // Primary sort: WIDTH
       const aWidth = a.WIDTH;
@@ -24,7 +24,15 @@ export const useSorting = (data: DisplayDrawingRecord[]) => {
       const aLength = a.LENGTH;
       const bLength = b.LENGTH;
       
-      return sortConfig.direction === 'ascending' ? aLength - bLength : bLength - aLength;
+      if (aLength !== bLength) {
+        return sortConfig.direction === 'ascending' ? aLength - bLength : bLength - aLength;
+      }
+      
+      // Tertiary sort: PITCH (when Width and Length values are equal)
+      const aPitch = a.PITCH;
+      const bPitch = b.PITCH;
+      
+      return sortConfig.direction === 'ascending' ? aPitch - bPitch : bPitch - aPitch;
     });
   }, [data, sortConfig]);
 
