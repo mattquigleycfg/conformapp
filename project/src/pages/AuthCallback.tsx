@@ -8,12 +8,38 @@ const AuthCallback: React.FC = () => {
 
   useEffect(() => {
     const processAuth = async () => {
+      // Check for authorization code in URL parameters (new flow)
+      const urlParams = new URLSearchParams(location.search);
+      const code = urlParams.get('code');
+      
+      if (code) {
+        try {
+          await handleCallback(code);
+        } catch (error) {
+          console.error('Authentication failed:', error);
+          // Redirect to login page on error
+          window.location.href = '/';
+        }
+        return;
+      }
+
+      // Fallback: Check for access token in hash (old flow for backward compatibility)
       const hash = location.hash.substring(1);
-      const params = new URLSearchParams(hash);
-      const accessToken = params.get('access_token');
+      const hashParams = new URLSearchParams(hash);
+      const accessToken = hashParams.get('access_token');
       
       if (accessToken) {
-        await handleCallback(accessToken);
+        try {
+          // For backward compatibility, we'll still support the old flow
+          // but we won't have refresh tokens
+          await handleCallback(accessToken);
+        } catch (error) {
+          console.error('Authentication failed:', error);
+          window.location.href = '/';
+        }
+      } else {
+        // No valid auth parameters found, redirect to home
+        window.location.href = '/';
       }
     };
 
