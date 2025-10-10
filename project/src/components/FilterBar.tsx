@@ -123,33 +123,6 @@ const FilterBar: React.FC<FilterBarProps> = ({
               </select>
             </div>
             
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">Box Gutter</label>
-              <select
-                className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                value={filters.BOX_GUTTER}
-                onChange={(e) => onFilterChange('BOX_GUTTER', e.target.value)}
-              >
-                <option value="">All Options</option>
-                {filterOptions.BOX_GUTTER.map(option => (
-                  <option key={option} value={option}>{option}</option>
-                ))}
-              </select>
-            </div>
-            
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">Ridge</label>
-              <select
-                className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                value={filters.RIDGE}
-                onChange={(e) => onFilterChange('RIDGE', e.target.value)}
-              >
-                <option value="">All Options</option>
-                {filterOptions.RIDGE.map(option => (
-                  <option key={option} value={option}>{option}</option>
-                ))}
-              </select>
-            </div>
             
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700">Capacity</label>

@@ -74,8 +74,6 @@ const DashboardPage: React.FC = () => {
               LENGTH: parseInt(parts[4] || '0'),
               PITCH: parseFloat(parts[5] || '0'),
               START_HEIGHT: 200,
-              BOX_GUTTER: 'NO',
-              RIDGE: 'NO',
               CAPACITY: 2.5,
               SHOP_DRAWING: `${currentFolder}/${file.name.replace('.pdf', '')}`
             };

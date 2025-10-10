@@ -17,8 +17,6 @@ export interface DisplayDrawingRecord {
   LENGTH: number;
   PITCH: number;
   START_HEIGHT: number;
-  BOX_GUTTER: string;
-  RIDGE: string;
   CAPACITY: number;
   SHOP_DRAWING: string;
 }
@@ -28,8 +26,6 @@ export interface FilterState {
   LENGTH: string;
   PITCH: string;
   START_HEIGHT: string;
-  BOX_GUTTER: string;
-  RIDGE: string;
   CAPACITY: string;
   SHOP_DRAWING: string;
 }

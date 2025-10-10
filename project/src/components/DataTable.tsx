@@ -16,8 +16,6 @@ const columns: ColumnDefinition[] = [
   { key: 'LENGTH', header: 'Length', width: 10 },
   { key: 'PITCH', header: 'Pitch', width: 10 },
   { key: 'START_HEIGHT', header: 'Start Height', width: 10 },
-  { key: 'BOX_GUTTER', header: 'Box Gutter', width: 10 },
-  { key: 'RIDGE', header: 'Ridge', width: 10 },
   { key: 'CAPACITY', header: 'Capacity (kpa)', width: 10 },
   { key: 'SHOP_DRAWING', header: 'Shop Drawing', width: 20 }
 ];
@@ -38,9 +36,9 @@ const DataTable: React.FC<DataTableProps> = ({
   // Filter columns based on current folder
   const getVisibleColumns = () => {
     if (currentFolder === 'CR') {
-      // For CR folder, exclude PITCH, BOX_GUTTER, and RIDGE columns
+      // For CR folder, exclude PITCH column
       return columns.filter(column => 
-        !['PITCH', 'BOX_GUTTER', 'RIDGE'].includes(column.key)
+        !['PITCH'].includes(column.key)
       );
     }
     return columns;

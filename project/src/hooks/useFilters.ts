@@ -6,8 +6,6 @@ const INITIAL_FILTER_STATE: FilterState = {
   LENGTH: '',
   PITCH: '',
   START_HEIGHT: '',
-  BOX_GUTTER: '',
-  RIDGE: '',
   CAPACITY: '',
   SHOP_DRAWING: ''
 };
@@ -48,8 +46,6 @@ export const useFilters = (data: DisplayDrawingRecord[]) => {
       LENGTH: new Set(),
       PITCH: new Set(),
       START_HEIGHT: new Set(),
-      BOX_GUTTER: new Set(),
-      RIDGE: new Set(),
       CAPACITY: new Set(),
       SHOP_DRAWING: new Set()
     };
