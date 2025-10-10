@@ -20,10 +20,16 @@ export const useFilters = (data: DisplayDrawingRecord[]) => {
         if (!value) return true; // Skip empty filters
         
         const itemKey = key as keyof DisplayDrawingRecord;
-        const itemValue = String(item[itemKey]).toLowerCase();
-        const filterValue = value.toLowerCase();
+        const itemValue = String(item[itemKey]);
+        const filterValue = value;
         
-        return itemValue.includes(filterValue);
+        // For numerical fields (WIDTH, LENGTH, PITCH), use exact matching
+        if (key === 'WIDTH' || key === 'LENGTH' || key === 'PITCH') {
+          return itemValue === filterValue;
+        }
+        
+        // For other fields, use substring matching (case-insensitive)
+        return itemValue.toLowerCase().includes(filterValue.toLowerCase());
       });
     });
   }, [data, filters]);
