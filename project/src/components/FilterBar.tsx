@@ -18,7 +18,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
   onClearFilters,
   currentFolder
 }) => {
-  const [isExpanded, setIsExpanded] = React.useState(false);
+  const [isExpanded, setIsExpanded] = React.useState(true);
 
   const hasActiveFilters = Object.values(filters).some(value => value !== '');
 
