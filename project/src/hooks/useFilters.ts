@@ -59,7 +59,22 @@ export const useFilters = (data: DisplayDrawingRecord[]) => {
 
     // Convert Sets to sorted arrays
     return Object.entries(options).reduce((acc, [key, valueSet]) => {
-      acc[key as keyof FilterState] = Array.from(valueSet).sort();
+      const sortedValues = Array.from(valueSet).sort((a, b) => {
+        // For numerical fields (WIDTH, LENGTH, PITCH), sort numerically
+        if (key === 'WIDTH' || key === 'LENGTH' || key === 'PITCH') {
+          const numA = parseFloat(a);
+          const numB = parseFloat(b);
+          // If both values are valid numbers, sort numerically
+          if (!isNaN(numA) && !isNaN(numB)) {
+            return numA - numB;
+          }
+          // If one or both are not numbers, fall back to string sorting
+          return a.localeCompare(b);
+        }
+        // For other fields, use default string sorting
+        return a.localeCompare(b);
+      });
+      acc[key as keyof FilterState] = sortedValues;
       return acc;
     }, {} as Record<keyof FilterState, string[]>);
   }, [data]);
