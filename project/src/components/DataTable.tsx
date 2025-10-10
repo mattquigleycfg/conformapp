@@ -36,9 +36,9 @@ const DataTable: React.FC<DataTableProps> = ({
   // Filter columns based on current folder
   const getVisibleColumns = () => {
     if (currentFolder === 'CR') {
-      // For CR folder, exclude PITCH column
+      // For CR folder, exclude PITCH and START_HEIGHT columns
       return columns.filter(column => 
-        !['PITCH'].includes(column.key)
+        !['PITCH', 'START_HEIGHT'].includes(column.key)
       );
     }
     return columns;

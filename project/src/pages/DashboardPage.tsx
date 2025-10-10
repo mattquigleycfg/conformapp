@@ -146,6 +146,7 @@ const DashboardPage: React.FC = () => {
               filterOptions={filterOptions}
               onFilterChange={updateFilter}
               onClearFilters={clearFilters}
+              currentFolder={currentFolder}
             />
             
             {isLoading ? (

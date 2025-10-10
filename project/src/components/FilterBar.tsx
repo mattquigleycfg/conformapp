@@ -8,13 +8,15 @@ interface FilterBarProps {
   filterOptions: Record<keyof FilterState, string[]>;
   onFilterChange: (key: keyof FilterState, value: string) => void;
   onClearFilters: () => void;
+  currentFolder?: string;
 }
 
 const FilterBar: React.FC<FilterBarProps> = ({
   filters,
   filterOptions,
   onFilterChange,
-  onClearFilters
+  onClearFilters,
+  currentFolder
 }) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
 
@@ -95,33 +97,37 @@ const FilterBar: React.FC<FilterBarProps> = ({
               </select>
             </div>
             
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">Pitch</label>
-              <select
-                className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                value={filters.PITCH}
-                onChange={(e) => onFilterChange('PITCH', e.target.value)}
-              >
-                <option value="">All Pitches</option>
-                {filterOptions.PITCH.map(option => (
-                  <option key={option} value={option}>{option}</option>
-                ))}
-              </select>
-            </div>
+            {currentFolder !== 'CR' && (
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700">Pitch</label>
+                <select
+                  className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  value={filters.PITCH}
+                  onChange={(e) => onFilterChange('PITCH', e.target.value)}
+                >
+                  <option value="">All Pitches</option>
+                  {filterOptions.PITCH.map(option => (
+                    <option key={option} value={option}>{option}</option>
+                  ))}
+                </select>
+              </div>
+            )}
             
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">Start Height</label>
-              <select
-                className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                value={filters.START_HEIGHT}
-                onChange={(e) => onFilterChange('START_HEIGHT', e.target.value)}
-              >
-                <option value="">All Start Heights</option>
-                {filterOptions.START_HEIGHT.map(option => (
-                  <option key={option} value={option}>{option}</option>
-                ))}
-              </select>
-            </div>
+            {currentFolder !== 'CR' && (
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700">Start Height</label>
+                <select
+                  className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  value={filters.START_HEIGHT}
+                  onChange={(e) => onFilterChange('START_HEIGHT', e.target.value)}
+                >
+                  <option value="">All Start Heights</option>
+                  {filterOptions.START_HEIGHT.map(option => (
+                    <option key={option} value={option}>{option}</option>
+                  ))}
+                </select>
+              </div>
+            )}
             
             
             <div className="space-y-2">
