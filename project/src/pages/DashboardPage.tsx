@@ -42,9 +42,11 @@ const DashboardPage: React.FC = () => {
     const loadFolders = async () => {
       try {
         const folderList = await listFolders();
-        setFolders(folderList);
-        if (folderList.length > 0) {
-          setCurrentFolder(folderList[0]);
+        // Filter out the 'ACOUSTIC SCREEN' folder
+        const filteredFolders = folderList.filter(folder => folder !== 'ACOUSTIC SCREEN');
+        setFolders(filteredFolders);
+        if (filteredFolders.length > 0) {
+          setCurrentFolder(filteredFolders[0]);
         }
       } catch (error: any) {
         console.error('Error loading folders:', error);
